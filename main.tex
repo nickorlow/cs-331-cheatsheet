@@ -90,6 +90,16 @@ We have a single resource which processes one job at a time. Job $j$ requires $t
 
 The greedy solution that should be used here is "Earliest Deadline First." The runtime of this (I believe) is $O(n*log(n))$ because you first must sort all of the jobs by the earliest deadline.
 
+Solution $O(n)$ \begin{itemize}
+    \item Sort $n$ jobs by deadline $d_1 \leq d_2 \leq ... \leq d_n$
+    \item $t \gets 0$
+    \item for $j = 1$ to $n$ \begin{itemize}
+        \item assign job $j$ to interval $[t, t+t_j]$
+        \item $s(j) \gets t$, $f(j) \gets t + t_j$
+    \end{itemize}
+    \item Output intervals $[s(i), f(i)]$, for $i=1,...,n$
+\end{itemize}
+
 \subsection{Scheduling all intervals}
 (Also known as the interval Partitioning Problem). Given a set of lectures where each Lecture $j$ has start time $s_j$ and finish time $f_j$: each lecture needs a classroom, each classroom can have one lecture at the same time. The goal is to find the minimum number of classrooms to schedule all lectures so that no two lectures occour at the same time. 
 
