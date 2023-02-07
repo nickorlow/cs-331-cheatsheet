@@ -25,10 +25,36 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      
       - uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
+      
+      - uses: paulhatch/semantic-version@v5.0.2
+        id: vnum
+        with:
+          tag_prefix: ""
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          version_format: "${major}.${minor}.${patch}-${increment}"
+          bump_each_commit: true
+    
+    
+      - name: Create Tag
+        uses: negz/create-tag@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Version (e.g. v0.1.0)
+          version: ${{ steps.vnum.outputs.version_tag }}
+          message: Autorelease of PDF due to commit in main branch
+          
+      - name: Release Tag
+        uses: Akryum/release-tag@v3.0.0
+        with:
+          # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
+          tag_name: ${{ steps.vnum.outputs.version_tag }}
+          # The name of the release. For example, `Release v1.0.1`
+          release_name: Release ${{ steps.vnum.outputs.version_tag }}
+          prerelease: true #since this hasn't been finalized yet
       
       - name: Release Upload
         uses: d1ceward/draft-assets-release-action@v2.0.0
