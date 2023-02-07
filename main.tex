@@ -8,7 +8,9 @@
 \sectionfont{\fontsize{9}{9}\selectfont}
 \subsectionfont{\fontsize{9}{9}\selectfont}
 \usepackage[compact]{titlesec}
-
+\usepackage{enumitem}
+\setlist[1]{itemsep=-5pt}
+\setlist[2]{itemsep=-5pt}
 \begin{document}
 
 \underline{This is unfinished and unrevised, double check any information you read on here}
@@ -40,10 +42,8 @@ This is repeated until the list of men is empty (i.e. everyone is engaged). Some
 
 \section{Complexity}
 Time complexity is typically referring to the worst-case runtime of an algorithm (big $O$ notation). The general ordering for these runtimes is provided below (from slowest to fastest):
-
 $O(1) (Constant) < O(log(n)) < O(\sqrt{n}) < O(n) (Linear) < O(n*log(n)) < n^2 (Quadratic) < n^c < 2^n (Exponential) < c^n < n! (Factorial) < n^n$
-
-Typically, you can simplify things that don't exactly fit here to simplify to something that does fit here through some mathematical operations. 
+(Things that don't exactly fit here can simplify to something that does fit here through some mathematical operations. )
 
 \section{Loop Invariant}
 This in an inductive-style proof that we use for algorithms that have a loop. A loop invariant refers to the condition needed for the loop to continue. In a loop invariant proof we have to show 3 things:
