@@ -89,7 +89,6 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           # Files to upload to GitHub, must be a multiline result. Glob supported.
           files: main.pdf
-          artefactName: "Cheat Sheet PDF"
 
 
 
