@@ -1,4 +1,4 @@
-# CS 331 Cheatsheet
+# CS 331 Cheatsheet [![Build and Release PDF from LaTeX](https://github.com/nickorlow/cs-331-cheatsheet/actions/workflows/compile-latex.yml/badge.svg)](https://github.com/nickorlow/cs-331-cheatsheet/actions/workflows/compile-latex.yml)
 A cheatsheet for CS 331 Midterm 1 (Spring 2023). 
 
 [Download PDF](https://github.com/nickorlow/cs-331-cheatsheet/releases/latest)
