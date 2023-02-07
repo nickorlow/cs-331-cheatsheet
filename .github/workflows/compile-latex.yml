@@ -61,7 +61,7 @@ jobs:
           # A file, directory or wildcard pattern that describes what to upload
           path: ./main.pdf
           retention-days: 31
-          
+      - run: ls -la
       - name: Tag Release Upload
         # You may pin to the exact commit or the version.
         # uses: dothq/tag-and-release-and-upload@0c850593873e6958f9b0da120370fd301f53662d
