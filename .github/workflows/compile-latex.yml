@@ -74,10 +74,16 @@ jobs:
           release_name: Release ${{ steps.vnum.outputs.version_tag }}
           prerelease: true #since this hasn't been finalized yet
       
-      - uses: xu-cheng/latex-action@v2
+      - name: Compile LaTeX via latexmk
+        # You may pin to the exact commit or the version.
+        # uses: antaljanosbenjamin/compile-latex@9bd5857f8d3c1a7e448116c9be00be52f20d5cc4
+        uses: antaljanosbenjamin/compile-latex@v1.0.0
         with:
-          root_file: main.tex
-            
+          # The LaTeX file to be compiled, relative to the root of the repository.
+          file: main.tex
+          # Additional arguments to pass over to latexmk.
+          args: -pdf
+          
       - name: Upload release assets to an existing release
         # You may pin to the exact commit or the version.
         # uses: echapmanFromBunnings/upload-release-assets@2094ef205aef6622a6ef0df24d34d365898304ce
