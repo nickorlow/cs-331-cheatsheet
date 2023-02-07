@@ -5,8 +5,8 @@
 \usepackage[nomarginpar, margin=.1in]{geometry}
 \usepackage{sectsty}
 
-\sectionfont{\fontsize{10}{10}\selectfont}
-\subsectionfont{\fontsize{10}{10}\selectfont}
+\sectionfont{\fontsize{9}{9}\selectfont}
+\subsectionfont{\fontsize{9}{9}\selectfont}
 \usepackage[compact]{titlesec}
 
 \begin{document}
@@ -26,7 +26,10 @@ The Algorithmic Solution is called the Gale-Shapley Algorithm ($O(n^2)$). This a
     \item The time complexity is $O(n^2)$. This is because in the worst case, each man and woman will have the same preference list and the order in which men propose will be the reverse order of the women's preference list.
     \item Once a woman is proposed to, she will never be single again, and her partner will only get better and better
     \item A man's partner will only get worse and worse
-    \item Typically, you can prove it by using a proof by contradiction
+    \item Typically, you can prove it by using a proof by contradiction. There are two claims to
+      consider, proving that all men and women get matched, and that the algorithm always produces
+      stable matches. In this second case, there are two important cases: either a man prefers
+      another woman to the one he is currently with and that the man and woman both want each other.
 \end{itemize}
 
 \section{Complexity}
