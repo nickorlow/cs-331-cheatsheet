@@ -56,13 +56,13 @@ This in an inductive-style proof that we use for algorithms that have a loop. A 
 
 \section{Graphs}
 \begin{itemize}
-    \item Bipartite Graph: Graph in which it is 2 colorable (i.e we can 
+  \item \underline{Bipartite Graph}: Graph in which it is 2 colorable (i.e we can 
       assign each node one of 2 colors and each node's neighbor will not 
       have the color of that node). It only has an odd number of cycles.
-    \item Strongly Connected: Graph in which there is a path between each 
+    \item \underline{Strongly Connected}: Graph in which there is a path between each 
       pair of vertices in both directions.
-    \item DAG: A directed graph with no cycles. If a graph has a topological order (where for every
-      edge (u,v) u comes first in the ordering), it is a DAG.
+    \item \underline{DAG}: A directed graph with no cycles. If a graph has a topological order (for every
+      edge (u,v) u is ordered first), it is a DAG.
 \end{itemize}
 
 \section{Breadth-First Search (BFS)}
@@ -87,7 +87,11 @@ Depth first search is a search algorithm for searching through a directed or und
 Dijkstra's algorithm finds the shortest path between one node and all others on an undirected graph (with positive edge weights). 
 \begin{itemize}
     \item Dijkstra runs in $O(|V|^2)$ time.
-    \item Dijkstra works by exploring every path and storing the lowest path's cost as a number in a node whenever it visits one.
+    \item Dijkstra works by exploring every path and storing the lowest path's cost as a number in a
+      node whenever it visits one. After initializing the distance and paths arrays and
+      adding each vertex to a queue, it iterates while the queue is not empty and pops a node u. For
+      each unvisited neighbor v it checks dist[v] > dist[u]+1, and if true, increments dist[v] by
+      one and adds u to paths[v].
 \end{itemize}
 
 \section{Greedy Algorithms}
