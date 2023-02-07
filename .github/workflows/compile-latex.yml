@@ -77,13 +77,6 @@ jobs:
       - uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
-          
-      - name: Release Upload
-        uses: d1ceward/draft-assets-release-action@v2.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          files: |
-            main.pdf
             
       - name: Upload release assets to an existing release
         # You may pin to the exact commit or the version.
