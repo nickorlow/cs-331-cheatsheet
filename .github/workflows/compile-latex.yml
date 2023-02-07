@@ -47,7 +47,18 @@ jobs:
           # Version (e.g. v0.1.0)
           version: ${{ steps.vnum.outputs.version_tag }}
           message: Autorelease of PDF due to commit in main branch
-          
+      
+      - name: Cleanup Directory
+        run: rm -rf . 
+
+      - name: Sleep Action
+        # You may pin to the exact commit or the version.
+        # uses: juliangruber/sleep-action@0ec9cf4f8d053aae56e4b402438184a31c6e87d3
+        uses: juliangruber/sleep-action@v2.0.0
+        with:
+          # A time period as ms or string (100, 10s, 1m)
+          time: "30s"
+    
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
