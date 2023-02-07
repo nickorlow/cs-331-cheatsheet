@@ -92,6 +92,19 @@ jobs:
           # A file, directory or wildcard pattern that describes what to upload
           path: ./main.pdf
           retention-days: 31
+          
+      - name: Release file
+        # You may pin to the exact commit or the version.
+        # uses: djnicholson/release-action@e9a535b3eced09c460e07a84118fb74ae9b53236
+        uses: djnicholson/release-action@v2.10
+        with:
+          # GitHub auth token
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Name of the tag for the release (will be associated with current branch)
+          tag-name: ${{ steps.vnum.outputs.version_tag }}
+          # File to release
+          file: main.pdf
+          asset-name: "Cheatsheet PDF"
 
       - name: GitHub Upload Release Artifacts
         # You may pin to the exact commit or the version.
