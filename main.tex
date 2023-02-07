@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+% maxamize space on paper
+\usepackage[nomarginpar, margin=.1in]{geometry}
+\usepackage{sectsty}
+
+\sectionfont{\fontsize{10}{10}\selectfont}
+\subsectionfont{\fontsize{10}{10}\selectfont}
+\usepackage[compact]{titlesec}
+
+\begin{document}
+
+\underline{This is unfinished and unrevised, double check any information you read on here}
+\section{Stable Marriage}
+Stable Marriage/Matching is the problem of finding a stable matching between two equally sized sets of elements given an ordering of preferences for each element.  A matching is not stable if: 
+
+\begin{enumerate}
+    \item There is an element A of the first matched set which prefers some given element B of the second matched set over the element to which A is already matched, and
+    \item B also prefers A over the element to which B is already matched.
+\end{enumerate}
+
+The Algorithmic Solution is called the Gale-Shapley Algorithm ($O(n^2)$). This algorithm works by having each man from a list of men propose to a woman in order of his preferences until he finds a fiance. If a woman is currently not engaged or is engaged to a man lower on her preference list, she will accept his proposal (and break off her old one if she was engaged. Her old fiance will be added back to the list of men) her new fiance will be removed from the list of men. This is repeated until the list of men is empty (i.e. everyone is engaged). Some important details about the algorithm are:
+
+\begin{itemize}
+    \item The time complexity is $O(n^2)$. This is because in the worst case, each man and woman will have the same preference list and the order in which men propose will be the reverse order of the women's preference list.
+    \item Once a woman is proposed to, she will never be single again, and her partner will only get better and better
+    \item A man's partner will only get worse and worse
+    \item Typically, you can prove it by using a proof by contradiction
+\end{itemize}
+
+\section{Complexity}
+Time complexity is typically referring to the worst-case runtime of an algorithm (big $O$ notation). The general ordering for these runtimes is provided below (from slowest to fastest):
+
+$O(1) (Constant) < O(log(n)) < O(\sqrt{n}) < O(n) (Linear) < O(n*log(n)) < n^2 (Quadratic) < n^c < 2^n (Exponential) < c^n < n! (Factorial) < n^n$
+
+Typically, you can simplify things that don't exactly fit here to simplify to something that does fit here through some mathematical operations. 
+
+\section{Loop Invariant}
+This in an inductive-style proof that we use for algorithms that have a loop. A loop invariant refers to the condition needed for the loop to continue. In a loop invariant proof we have to show 3 things:
+\begin{itemize}
+    \item \underline{Initialization}: The loop invariant is true prior to the first iteration of the loop
+    \item \underline{Maintenance}: If it is true before an iteration of the loop, it remains true before the next iteration
+    \item \underline{Termination}: When the loop terminates, the invariant gives us a useful property that helps show the algorithm is correct.
+\end{itemize}
+
+\section{Breadth-First Search (BFS)}
+Breadth first search is a search algorithm for searching through a directed or undirected connected graph. Some things to know:
+
+\begin{itemize}
+    \item BFS searches nodes in increating distance from the start node. Basically is a level-order traversal.
+    \item BFS (typically) uses a queue data structure to keep track of nodes being visited
+    \item BFS' time complexity is $O(|V|+|E|)$. This is because it explores every node and edge on a graph
+\end{itemize}
+
+\section{Depth-First Search (DFS)}
+Depth first search is a search algorithm for searching through a directed or undirected connected graph. Some things to know:
+
+\begin{itemize}
+    \item DFS searches nodes by following paths until a dead-end is found and then pop back up until there is an alternate route. Basically a pre-order traversal. 
+    \item DFS (typically) uses a stack data structure to keep track of nodes being visited
+    \item DFS' time complexity is $O(|V|+|E|)$. This is because it explores every node and edge on a graph
+\end{itemize}
+
+\section{Greedy Algorithms}
+Greedy algorithms (while it is hard to define) are algorithms that make the locally optimal choice in hopes that it generates a globally optimal choice. In practice, it generates a heuristic for optimal choices. Greedy algorithms do not always choose the most efficient decisions (i.e. 15 cents example with 12c, 5c, and 1c from in class). There are 2 proof methods generally used to prove a Greedy Algorithm:
+
+\begin{itemize}
+    \item \underline{Exchange Proof}: Every algorithm can be eventually transformed to the greedy algorithm without hurting its quality. Typically you use induction on the swapping part and then use contradiction to prove that they have the same number of elements.
+    \item \underline{Stays-Ahead Proof}:Every step is not worse than any other (optimal) algorithm.Typically you use induction on the staying ahead and then use contradiction to prove that they have the same number of elements.
+\end{itemize}
+
+\subsection{Interval Scheduling}
+With interval scheduling, we have a set of jobs and are given an $s_j$ and an $f_j$ which represent start and finishing times respectively. Our goal is to obtain the maximum number of mutually compatible jobs which can be scheduled at the same time. The optimal greedy solution here is "Earliest Finishing Time." 
+
+Solution $O(n*log*n))$:
+\begin{itemize}
+    \item Sort jobs by finishing time (earliest first) $O(n*log(n))$
+    \item $A \gets empty set$
+    \item for $j = 1$ to $n$ \begin{itemize}
+        \item if job $j$ is compatible with A \begin{itemize}
+            \item $A \gets A U \{j\}$
+        \end{itemize}
+    \item Return $A$
+    \end{itemize}
+\end{itemize}
+
+\subsection{Scheduling to minimize lateness}
+We have a single resource which processes one job at a time. Job $j$ requires $t_j$ units of processing time and is due at time $d_j$. If $j$ starts at $s_j$ and finishes at time $f_j = s_j + t_j$, lateness is measured using the formula $max(0, f_j - d_j)$. Our goal is to schedule all jobs in such a way to minimize lateness.
+
+The greedy solution that should be used here is "Earliest Deadline First." The runtime of this (I believe) is $O(n*log(n))$ because you first must sort all of the jobs by the earliest deadline.
+
+\subsection{Scheduling all intervals}
+(Also known as the interval Partitioning Problem). Given a set of lectures where each Lecture $j$ has start time $s_j$ and finish time $f_j$: each lecture needs a classroom, each classroom can have one lecture at the same time. The goal is to find the minimum number of classrooms to schedule all lectures so that no two lectures occour at the same time. 
+
+This (seems to be) an adaptation of the interval coloring problem. 
+
+Solution $O(n*log(n)$:
+\begin{itemize}
+    \item Sort the list $O(n*log(n))$
+    \item main loop $n$ \begin{itemize}
+        \item for each classroom $k$, maintain finish time of the last job added
+        \item Keep the classroom in a priority queue $O(log(n))$
+        \item The classroom that is available first will be on top of the priority queue
+    \end{itemize}
+\end{itemize}
+
+\section{Dijkstra}
+Dijkstra's algorithm finds the shortest path between one node and all others on an undirected graph (with positive edge weights). 
+\begin{itemize}
+    \item Dijkstra runs in $O(|V|^2)$ time.
+    \item Dijkstra works by exploring every path and storing the lowest path's cost as a number in a node whenever it visits one.
+\end{itemize}
+\section{Extra Info:}
+\begin{itemize}
+    \item Bipartite Graph: Graph in which it is 2 colorable (i.e we can assign each node one of 2 colors and each node's neighbor will not have the color of that node). It only has an odd number of cycles.
+\end{itemize}
+\end{document}
+
