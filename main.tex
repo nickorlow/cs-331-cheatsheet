@@ -63,7 +63,7 @@ This in an inductive-style proof that we use for algorithms that have a loop. A 
 \begin{itemize}
   \item \underline{Bipartite Graph}: Graph in which it is 2 colorable (i.e we can 
       assign each node one of 2 colors and each node's neighbor will not 
-      have the color of that node). It cannot have an odd length cycle.
+      have the color of that node). It cannot have an odd length cycle. (Textbook reccomends checking with BFS)
     \item \underline{Strongly Connected}: Graph in which there is a path between each 
       pair of vertices in both directions. Directed: ($|E| = |V|*(|V|-1)$), Undirected: ($|E| = |V|*(|V|-1)/2$)
     \item \underline{DAG}: A \underline{directed} graph with no cycles. If a graph has a topological order (for every
