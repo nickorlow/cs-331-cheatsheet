@@ -30,9 +30,15 @@ jobs:
         with:
           root_file: main.tex
       
-      - name: ls
-        run: ls
-      
+      - name: Release Upload
+        uses: d1ceward/draft-assets-release-action@v2.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: |
+            main.pdf
+
+ 
+
 
 
       
