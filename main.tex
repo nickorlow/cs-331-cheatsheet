@@ -43,8 +43,13 @@ This is repeated until the list of men is empty (i.e. everyone is engaged). Some
 \section{Complexity}
 Time complexity is typically referring to the worst-case runtime of an algorithm (big $O$ notation). The general ordering for these runtimes is provided below (from slowest to fastest):
 $O(1) < O(log(n)) < O(\sqrt{n}) < O(n) < O(n*log(n)) < n^2 < n^c < 2^n < c^n < n! < n^n$
-
-(Things that don't exactly fit here can simplify to something that does fit here through some mathematical operations.)
+\begin{itemize}
+  \item Big-Oh: f(n) is O(g(n)) if f(n) is less than or equal to g(n).
+  \item little-oh: f(n) is o(g(n)) if f(n) less than g(n).
+  \item big-omega: f(n) is $\Omega (g(n))$ if f(n) greater than or equal to g(n).
+  \item little-omega: f(n) is $\omega (g(n))$ if f(n) is greater than g(n).
+  \item big-theta: f(n) is $\Theta (g(n))$ if f(n) is equal to g(n).
+\end{itemize}
 
 \section{Loop Invariant}
 This in an inductive-style proof that we use for algorithms that have a loop. A loop invariant refers to the condition needed for the loop to continue. In a loop invariant proof we have to show 3 things:
@@ -100,7 +105,7 @@ Greedy algorithms (while it is hard to define) are algorithms that make the loca
 \begin{itemize}
     \item \underline{Exchange Proof}: Every algorithm can be eventually transformed to the greedy
       algorithm without hurting its quality. Typically, you use induction on the swapping part and then use contradiction to prove that they have the same number of elements.
-    \item \underline{Stays-Ahead Proof}:Every step is not worse than any other (optimal) algorithm.
+    \item \underline{Stays-Ahead Proof}:Every step is not worse than an optimal algorithm in both time complexity and solution.
       Typically, you use induction on the staying ahead and then use contradiction to prove that they have the same number of elements.
 \end{itemize}
 
