@@ -38,11 +38,42 @@ jobs:
           minor_pattern: "(MINOR)"
           version_format: "${major}.${minor}.${patch}-${increment}"
           bump_each_commit: true
+    
+    
+      - name: Create Tag
+        uses: negz/create-tag@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Version (e.g. v0.1.0)
+          version: ${{ steps.vnum.outputs.version_tag }}
+          message: Autorelease of PDF due to commit in main branch
+      
+      - name: Cleanup Directory
+        run: rm -rf ./* 
 
+      - name: Sleep Action
+        # You may pin to the exact commit or the version.
+        # uses: juliangruber/sleep-action@0ec9cf4f8d053aae56e4b402438184a31c6e87d3
+        uses: juliangruber/sleep-action@v2.0.0
+        with:
+          # A time period as ms or string (100, 10s, 1m)
+          time: "30s"
+    
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
           
+      - name: Release Tag
+        uses: Akryum/release-tag@v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
+          tag_name: ${{ steps.vnum.outputs.version_tag }}
+          # The name of the release. For example, `Release v1.0.1`
+          release_name: Release ${{ steps.vnum.outputs.version_tag }}
+          prerelease: true #since this hasn't been finalized yet
+      
       - name: Compile LaTeX via latexmk
         # You may pin to the exact commit or the version.
         # uses: antaljanosbenjamin/compile-latex@9bd5857f8d3c1a7e448116c9be00be52f20d5cc4
@@ -61,22 +92,18 @@ jobs:
           # A file, directory or wildcard pattern that describes what to upload
           path: ./main.pdf
           retention-days: 31
-      - run: ls -la
-      - name: Tag Release Upload
+
+      - name: GitHub Upload Release Artifacts
         # You may pin to the exact commit or the version.
-        # uses: dothq/tag-and-release-and-upload@0c850593873e6958f9b0da120370fd301f53662d
-        uses: dothq/tag-and-release-and-upload@v1.0.2
+        # uses: Roang-zero1/github-upload-release-artifacts-action@87271b3f8dca9feb9e9d44381fddd2db7f09d6e1
+        uses: Roang-zero1/github-upload-release-artifacts-action@v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # secrets.GITHUB_TOKEN, or a token with read/write access to the repo
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          # Version to create
-          version: ${{ steps.vnum.outputs.version_tag }}
-          # Name of release
-          name: Release ${{ steps.vnum.outputs.version_tag }}
-          # json string array of assets paths to upload to the release. E.G. '[ "win-x64.zip", "linux-x24.zip" ]'
-          assets: '["main.pdf"]'
-          # bool value to overwrite assets
-          overwrite: true
+          # Allows to pass an already created tag, forces update_existing to true.
+          created_tag: ${{ steps.vnum.outputs.version_tag }}
+          
+
 
 
 
