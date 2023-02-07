@@ -13,14 +13,20 @@
 
 \underline{This is unfinished and unrevised, double check any information you read on here}
 \section{Stable Marriage}
-Stable Marriage/Matching is the problem of finding a stable matching between two equally sized sets of elements given an ordering of preferences for each element.  A matching is not stable if: 
+Stable Marriage/Matching is the problem of finding a stable matching between two equally sized sets of elements given an ordering of preferences for each element.  
+A matching is not stable if: 
 
 \begin{enumerate}
     \item There is an element A of the first matched set which prefers some given element B of the second matched set over the element to which A is already matched, and
     \item B also prefers A over the element to which B is already matched.
 \end{enumerate}
 
-The Algorithmic Solution is called the Gale-Shapley Algorithm ($O(n^2)$). This algorithm works by having each man from a list of men propose to a woman in order of his preferences until he finds a fiance. If a woman is currently not engaged or is engaged to a man lower on her preference list, she will accept his proposal (and break off her old one if she was engaged. Her old fiance will be added back to the list of men) her new fiance will be removed from the list of men. This is repeated until the list of men is empty (i.e. everyone is engaged). Some important details about the algorithm are:
+The Algorithmic Solution is called the Gale-Shapley Algorithm ($O(n^2)$). This algorithm works by
+iterating while a man is free that hasn't proposed to every woman. For each man, you choose the
+woman who is highest on the preference list and has not been proposed to yet. If the woman is free
+you assign the man and woman together, if the woman prefers the man to her current fiance you break
+the pair and assign the man and woman together (old fiance gets added back to the list of men), and otherwise, the woman rejects the man. 
+This is repeated until the list of men is empty (i.e. everyone is engaged). Some important details about the algorithm are:
 
 \begin{itemize}
     \item The time complexity is $O(n^2)$. This is because in the worst case, each man and woman will have the same preference list and the order in which men propose will be the reverse order of the women's preference list.
