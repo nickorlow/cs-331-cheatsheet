@@ -7,36 +7,16 @@
 
 \sectionfont{\fontsize{9}{9}\selectfont}
 \subsectionfont{\fontsize{9}{9}\selectfont}
+\subsubsectionfont{\fontsize{9}{9}\selectfont}
 \usepackage[compact]{titlesec}
 \usepackage{enumitem}
 \setlist[1]{itemsep=-5pt}
 \setlist[2]{itemsep=-5pt}
 \begin{document}
-% -Solving recurrences
-
-% -Merge Sort
-
-% -closest pair
-
-% Dynamic Programming
-
-% - Weighted Interval Scheduling
-
-% - Memoization
-
-% - Subset Sums and Knapsacks
-
-% - Sequence Alignment
-
-% - Bellman-Ford Algorithm
-
-% Network Flow
-
-% - Maximum Flow Problem and the Ford-Fulkerson Algorithm.
-
-% - Maximum Flow and Minimum Cut in a Network
-\section{Solving Recurrences}
-\subsection{via Unrolling}
+\underline{This document is currently incomplete - Do not use on exam - Information may be incorrect}
+\section{Divide and Conquer}
+\subsection{Solving Recurrences}
+\subsubsection{via Unrolling}
 To solve the recurrence via unrolling, you plot the values of the size of the problem and
 the time taken to solve the problem in the table to find a generalized equation (see below). For example,
 merge sort's recurrence is: $T(n) = 2T(\frac{n}{2}) + n$ where $T(1) = 0$
@@ -57,7 +37,7 @@ to get the runtime. You can get the levels by solving the following for $k$: $1 
 at the base case and where the righthand side is the generalized function found in the size column.
 In this case, $k \approx log(n)$, therefore the runtime is $O(n*log(n))$
 \end{multicols}
-\subsection{via Master Theorem}
+\subsubsection{via Master Theorem}
 In order to use the master theorem to solve a problem, the recurrence must be of the form:
 $T(n) = aT(\frac{n}{b})+f(n)$
 There are three cases for the master theorem, in each case it must be \textbf{polynominally} larger/smaller for the case to apply.
@@ -68,10 +48,11 @@ There are three cases for the master theorem, in each case it must be \textbf{po
     \item (Root-Heavy) if $f(n) > n^{log_b(a)}$, then $T(n) = O(f(n))$
 \end{enumerate}
 
-\section{Merge Sort}
-Merge Sort is a divide-and-conquer algorithm for sorting lists. Merge sort is a sorting algorithm that works by dividing an array into smaller subarrays, sorting each subarray, and then merging the sorted subarrays back together to form the final sorted array. It has a time complexity of $O(n*log(n))$ (see 1.1)
+\subsection{Merge Sort}
+Merge sort is a sorting algorithm that works by dividing an array into smaller subarrays, sorting each subarray, and then merging the sorted subarrays back together to form the final sorted array. It has a time complexity of $O(n*log(n))$ (see 1.1.2)
 
-\section{Closest Pair}
+\subsection{Closest Pair}
+
 \section{Dynamic Programming}
 \subsection{Weighted Interval Scheduling}
 \subsection{Memoization}
