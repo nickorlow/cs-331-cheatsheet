@@ -54,6 +54,12 @@ There are three cases for the master theorem, in each case it must be \textbf{po
 Merge sort is a sorting algorithm that works by dividing an array into smaller subarrays, sorting each subarray, and then merging the sorted subarrays back together to form the final sorted array. It has a time complexity of $O(n*log(n))$ (see 1.1.2)
 
 \subsection{Closest Pair}
+Given an array $A$ of $n$ points, find the 2 points that are the closest to each other. 
+The solution to this works by dividing $A$ into 2 halves (with $w$ being the middlemost element) and recursively finding the smallest
+distance between 2 nodes in a subarray. Let $d$ be the minimum of the shortest distance between
+the 2 subarrays. We then find all nodes whose x-coordinate is closer to $w_x$ than $d$, and
+put them into an array $S$. We now find the lowest distance in $S$, if it is lower than $d$, 
+then we set $d$ equal to it. We then finally return $d$. TC: $O(n*log(n)^2)$
 
 \section{Dynamic Programming}
 Break up a problem into a series of overlapping sub-problems and build up a solution to larger sub-problems.
@@ -104,8 +110,26 @@ $OPT(n) = \begin{cases}
 \end{multicols}
 
 \section{Network Flow}
-\subsection{Maximum Flow Problem and Ford-Fulkerson Algorithm}
+Graphs are sometimes used to model transportation networks. In
+such networks, edges carry some sort of traffic and nodes act like switches passing the
+traffic between edges. For example, in a computer network, the edges are links that carry
+the data and the nodes are switches. Network flow are used to model such transportation
+networks.
+
+\subsection{Maximum Flow Problem}
+The max flow problem represents a problem in which we want to find the maximum flow between
+2 edges (a source, typically denoted with $s$, and a sink, typically denoted with $t$). 
+
+\subsection{Ford-Fulkerson Algorithm}
+The Ford-Fulkerson Algorithm works by finding a simple path $p$ beetween $s$ and $t$, then finding
+the edge with the least capacity on that path and augmenting each node with that value.
+Note that you can go against the direction of an edge in the graph so long as you subtract when augmenting
+it's capacity.
+This is then repeated until no paths between $s$ and $t$ with a nonzero capacity exist. 
+
 \subsection{Maximum Flow and Minimum Cut in a Network}
+The min cut refers to the minimum set of edges that would have to be removed such that there is no longer
+a path from $s$ to $t$. The capacity of the cut edges is equal to the maximum flow of the network.
 
 \end{document}
 
