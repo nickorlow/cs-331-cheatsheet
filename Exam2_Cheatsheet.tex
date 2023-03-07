@@ -4,7 +4,7 @@
 % maxamize space on paper
 \usepackage[nomarginpar, margin=.1in]{geometry}
 \usepackage{sectsty}
-
+\usepackage{amsmath}
 \sectionfont{\fontsize{9}{9}\selectfont}
 \subsectionfont{\fontsize{9}{9}\selectfont}
 \subsubsectionfont{\fontsize{9}{9}\selectfont}
@@ -90,6 +90,19 @@ The recurrence representing this is: $OPT(i, j) = min[a_{x_iy_j} + OPT(i - 1, j 
 the length of each of the strings.
 
 \subsection{Bellman-Ford Algorithm}
+\begin{multicols}{2}
+Accomplishes the same thing as Djikstra's algorithms while also allowing for negative
+weight edges. The recurrence for solving this is on the right.
+Where $w$ represents an intermediate vertex, $c_{vw}$ represents the cost from going from $v$ to $w$,
+$v$ represents the starting vertex, and $i$ represents the length of the path. 
+\columnbreak
+
+$OPT(n) = \begin{cases}
+    OPT(i-1, v)  & P \text{ uses at most } i-1 \text{edges} \\
+    OPT(i-1, w) + c_{vw} & P \text{ uses at most } i \text{ edges}
+  \end{cases}$
+\end{multicols}
+
 \section{Network Flow}
 \subsection{Maximum Flow Problem and Ford-Fulkerson Algorithm}
 \subsection{Maximum Flow and Minimum Cut in a Network}
