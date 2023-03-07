@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-
+\usepackage{multicol}
 % maxamize space on paper
 \usepackage[nomarginpar, margin=.1in]{geometry}
 \usepackage{sectsty}
@@ -38,9 +38,10 @@
 \section{Solving Recurrences}
 \subsection{via Unrolling}
 To solve the recurrence via unrolling, you plot the values of the size of the problem and
-the time taken to solve the problem in the table to find a generalized equation. For example,
+the time taken to solve the problem in the table to find a generalized equation (see below). For example,
 merge sort's recurrence is: $T(n) = 2T(\frac{n}{2}) + n$ where $T(1) = 0$
 
+\begin{multicols}{2}
 \begin{center}
     \begin{tabular}{c c c}
         \underline{Level} & \underline{Size} & \underline{Time} \\
@@ -50,13 +51,12 @@ merge sort's recurrence is: $T(n) = 2T(\frac{n}{2}) + n$ where $T(1) = 0$
         k & $n/2^k$ & $2^k(n/2^k) = n$ \\
     \end{tabular}
 \end{center}
-
+\columnbreak
 You can then multiply your generalized time function (in this case just $n$) by the number of levels
 to get the runtime. You can get the levels by solving the following for $k$: $1 = n/2^k$ where $1$ represents the value of $n$
 at the base case and where the righthand side is the generalized function found in the size column.
 In this case, $k \approx log(n)$, therefore the runtime is $O(n*log(n))$
-
-
+\end{multicols}
 \subsection{via Master Theorem}
 In order to use the master theorem to solve a problem, the recurrence must be of the form:
 $T(n) = aT(\frac{n}{b})+f(n)$
@@ -69,6 +69,8 @@ There are three cases for the master theorem, in each case it must be \textbf{po
 \end{enumerate}
 
 \section{Merge Sort}
+Merge Sort is a divide-and-conquer algorithm for sorting lists. Merge sort is a sorting algorithm that works by dividing an array into smaller subarrays, sorting each subarray, and then merging the sorted subarrays back together to form the final sorted array. It has a time complexity of $O(n*log(n))$ (see 1.1)
+
 \section{Closest Pair}
 \section{Dynamic Programming}
 \subsection{Weighted Interval Scheduling}
