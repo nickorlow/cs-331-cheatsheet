@@ -13,8 +13,10 @@
 \setlist[1]{itemsep=-5pt}
 \setlist[2]{itemsep=-5pt}
 \begin{document}
-\underline{This document is currently incomplete - Do not use on exam - Information may be incorrect}
+\underline{This document is currently incomplete - Information may be incorrect - Please contribute on GitHub!}
 \section{Divide and Conquer}
+Break up a problem into sub-problems, solve each sub-problem independently and combine the solutions to sub-problems to form a
+solution to the original problem
 \subsection{Solving Recurrences}
 \subsubsection{via Unrolling}
 To solve the recurrence via unrolling, you plot the values of the size of the problem and
@@ -54,10 +56,39 @@ Merge sort is a sorting algorithm that works by dividing an array into smaller s
 \subsection{Closest Pair}
 
 \section{Dynamic Programming}
+Break up a problem into a series of overlapping sub-problems and build up a solution to larger sub-problems.
+The basic idea behind many DP algorithms is to design a recurrence where we take the max/min of adding the current
+object to the result. When proving a DP algo, typically you prove 2 things: that the recurrence you choose is right, and 
+that your algorithm correctly implements the recurrence
+
 \subsection{Weighted Interval Scheduling}
+Same as interval scheduling problem except that each interval has a weight attached to it. 
+The recurrence $OPT(i) = max[OPT(v_i) + p_i, OPT(i - 1)]$ where $i$ is the $i^{th}$ router, $v(i)$
+is a function that returns the interval immeadeatly preceeding the $i^{th}$ interval without overlapping with it, 
+and $p_i$ is the weight of the $i^{th}$ interval. The runtime for this solution is $O(n)$ when $v(i)$ is 
+represented with a memoized array (see 2.2).
+
 \subsection{Memoization}
+Speeds up algorithms by eliminating the repetitive computation of results \& avoiding repeated function calls that process the same input.
+As an example, in (2.1), if we used a function $v(i)$, then our runtime would be $O(n^2)$, however if we created an array $V$ and ran $v(i)$
+on all $i \leq 0 \leq num\_intervals$  and stored it in $V[i]$, then our runtime would be $O(n)$
+
 \subsection{Subset Sums and Knapsacks}
+The goal of this problem is to find the maximum set of weights whose sum is less than $W$.
+The recurrence used to solve this is $OPT(i, W) = max[w_i + OPT(i - 1, W - w_i), OPT(i-1, W)]$ (if $w_i < W$ then: $OPT(i, W) = OPT(i-1, W)$).
+Where $W$ is the max weight, $w_i$ is the weight of object $i$. Typically, the output from the OPT 
+function is memoized into a 2d array, resulting in a pesudo-polynomial time complexity of $O(n * W)$
+
 \subsection{Sequence Alignment}
+Given two strings X and Y, an alignment M of X and Y is obtained by inserting spaces into or
+before or after the ends of X and Y so that the resulting two strings $X'$ and $Y'$  have the samenumber of characters.
+The cost of an alignment will be $(g * c_g) + (m + c_m)$ where $g$ is the gaps added, $m$ is the mismatches, and $c_g$, $c_m$
+are the costs for adding a gap and having a mismatch, respectively.
+The recurrence representing this is: $OPT(i, j) = min[a_{x_iy_j} + OPT(i - 1, j - 1),\delta + OPT(i - 1, j), \delta + OPT(i, j - 1)]$
+
+\noindent The output of $OPT$ is typically memoized into a 2d array, and results in a runtime of $O(m * n)$ where $m$ and $n$ represent
+the length of each of the strings.
+
 \subsection{Bellman-Ford Algorithm}
 \section{Network Flow}
 \subsection{Maximum Flow Problem and Ford-Fulkerson Algorithm}
