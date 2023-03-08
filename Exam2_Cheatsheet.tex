@@ -70,7 +70,7 @@ that your algorithm correctly implements the recurrence
 \subsection{Weighted Interval Scheduling}
 Same as interval scheduling problem except that each interval has a weight attached to it. 
 The recurrence $OPT(i) = max[OPT(v_i) + p_i, OPT(i - 1)]$ where $i$ is the $i^{th}$ router, $v(i)$
-is a function that returns the interval immeadeatly preceeding the $i^{th}$ interval without overlapping with it, 
+is a function that returns the interval immediately preceeding the $i^{th}$ interval without overlapping with it, 
 and $p_i$ is the weight of the $i^{th}$ interval. The runtime for this solution is $O(n)$ when $v(i)$ is 
 represented with a memoized array (see 2.2).
 
