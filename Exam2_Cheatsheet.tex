@@ -47,7 +47,7 @@ There are three cases for the master theorem, in each case it must be \textbf{po
 \begin{enumerate}
     \item (Leaf-Heavy) if $f(n) < n^{log_b(a)}$, then  $T(n) = O(n^{log_b(a)})$
     \item if $f(n) = n^{log_b(a)}$, then $T(n) = O(n^{log_b(a)}log(n))$
-    \item (Root-Heavy) if $f(n) > n^{log_b(a)}$, then $T(n) = O(f(n))$
+    \item (Root-Heavy) if $f(n) > n^{log_b(a)}$, then $T(n) = O(f(n))$ (Note: must also satisfy the regularity condition $af(n/b) \leq cf(n)$, $c < 1$)
 \end{enumerate}
 
 \subsection{Merge Sort}
