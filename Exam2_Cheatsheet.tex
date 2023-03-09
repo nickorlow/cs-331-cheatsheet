@@ -13,7 +13,7 @@
 \setlist[1]{itemsep=-5pt}
 \setlist[2]{itemsep=-5pt}
 \begin{document}
-\underline{This document is currently incomplete - Information may be incorrect - Please contribute on GitHub!}
+%\underline{This document is currently incomplete - Information may be incorrect - Please contribute on GitHub!}
 \section{Divide and Conquer}
 Break up a problem into sub-problems, solve each sub-problem independently and combine the solutions to sub-problems to form a
 solution to the original problem
@@ -57,6 +57,10 @@ There are three cases for the master theorem, in each case it must be \textbf{po
     \end{itemize}
 \end{enumerate}
 
+Note: In discussion section 5, it was shown that when $f(n) = n^2+n+1$, and the righthandside of the comparision was
+$n^2$ that case 2 applied since $f(n) \in O(n^2)$
+
+
 \subsection{Merge Sort}
 Merge sort is a sorting algorithm that works by dividing an array into smaller subarrays, sorting each subarray, and then merging the sorted subarrays back together to form the final sorted array. It has a time complexity of $O(n*log(n))$ (see 1.1.1)
 
@@ -76,7 +80,7 @@ that your algorithm correctly implements the recurrence
 
 \subsection{Weighted Interval Scheduling}
 Same as interval scheduling problem except that each interval has a weight attached to it. 
-The recurrence $OPT(i) = max[OPT(v_i) + p_i, OPT(i - 1)]$ where $i$ is the $i^{th}$ router, $v(i)$
+The recurrence $OPT(i) = max[OPT(v_i) + p_i, OPT(i - 1)]$ where $i$ is the $i^{th}$ interval, $v(i)$
 is a function that returns the interval immediately preceding the $i^{th}$ interval without overlapping with it, 
 and $p_i$ is the weight of the $i^{th}$ interval. The runtime for this solution is $O(n)$ when $v(i)$ is 
 represented with a memoized array (see 2.2).
@@ -91,14 +95,18 @@ The goal of this problem is to find the maximum set of weights whose sum is less
 The recurrence used to solve this is $OPT(i, W) = max[w_i + OPT(i - 1, W - w_i), OPT(i-1, W)]$ (if $w_i < W$ then: $OPT(i, W) = OPT(i-1, W)$).
 Where $W$ is the max weight, $w_i$ is the weight of object $i$. Typically, the output from the OPT 
 function is memoized into a 2d array, resulting in a pseudo-polynomial (see section 4) time complexity of $O(n * W)$
-
+\vspace{10em}
 \subsection{Sequence Alignment}
+
+\begin{multicols}{2}
 Given two strings X and Y, an alignment M of X and Y is obtained by inserting spaces into or
 before or after the ends of X and Y so that the resulting two strings $X'$ and $Y'$  have the same number of characters.
 The cost of an alignment will be $(g * c_g) + (m + c_m)$ where $g$ is the gaps added, $m$ is the mismatches, and $c_g$, $c_m$
 are the costs for adding a gap and having a mismatch, respectively.
 The recurrence representing this is: $OPT(i, j) = min[a_{x_iy_j} + OPT(i - 1, j - 1),\delta + OPT(i - 1, j), \delta + OPT(i, j - 1)]$ \\ 
 $(i,j)$ is part of the optimal solution only if the first term is the minimum.
+
+\columnbreak
 
 Algorithm:
 \begin{itemize}
@@ -110,6 +118,7 @@ Algorithm:
     \item \quad \quad Use recurrence
     \item Return A[m, n]
 \end{itemize}
+\end{multicols}
 
 \noindent The output of $OPT$ is typically memoized into a 2d array, and results in a runtime of $O(m * n)$ where $m$ and $n$ represent
 the length of each of the strings.
@@ -183,5 +192,8 @@ exponential, but ignoring that it seems as if it is linear.
     \item Inductive Hypothesis: Assume that for $0 \le i' + j' < i+j$, $OPT(i', j')$ is correct
     \item Inductive step: Prove  $OPT(i, j)$
 \end{itemize}
+
+
+
 
 \end{document}
