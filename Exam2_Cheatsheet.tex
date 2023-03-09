@@ -46,12 +46,12 @@ $T(n) = aT(\frac{n}{b})+f(n)$ where a and b are constants.
 There are three cases for the master theorem, in each case it must be \textbf{polynominally} larger/smaller for the case to apply.
 
 \begin{enumerate}
-    \item (Leaf-Heavy) if $f(n) < n^{log_b(a)}$, then  $T(n) = O(n^{log_b(a)})$
+    \item (Leaf-Heavy) if $O(f(n)) < n^{log_b(a)}$, then  $T(n) = O(n^{log_b(a)})$
     \begin{itemize}
         \item polynomially smaller: $f(n)$ must be smaller than $n^{\log_b(a)}$ by a factor of $n^{\epsilon}$
     \end{itemize}
-    \item if $f(n) = n^{log_b(a)}$, then $T(n) = O(n^{log_b(a)}log(n))$
-    \item (Root-Heavy) if $f(n) > n^{log_b(a)}$, then $T(n) = O(f(n))$ (Note: must also satisfy the regularity condition $af(n/b) \leq cf(n)$, $c < 1$)
+    \item if $O(f(n)) = n^{log_b(a)}$, then $T(n) = O(n^{log_b(a)}log(n))$
+    \item (Root-Heavy) if $O(f(n)) > n^{log_b(a)}$, then $T(n) = O(f(n))$ (Note: must also satisfy the regularity condition $af(n/b) \leq cf(n)$, $c < 1$)
     \begin{itemize}
         \item polynomially larger: $f(n)$ must be smaller than $n^{\log_b(a)}$ by a factor of $n^{\epsilon}$
     \end{itemize}
