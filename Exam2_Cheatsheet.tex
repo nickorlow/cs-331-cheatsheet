@@ -21,7 +21,8 @@ solution to the original problem
 \subsubsection{via Unrolling}
 To solve the recurrence via unrolling, you plot the values of the size of the problem and
 the time taken to solve the problem in the table to find a generalized equation (see below). For example,
-merge sort's recurrence is: $T(n) = 2T(\frac{n}{2}) + n$ where $T(1) = 0$
+merge sort's recurrence is: $T(n) = 2T(\frac{n}{2}) + n$ where $T(1) = 0$. In general, a is
+the number of sub problems and it is multiplied by the size of each sub problem. 
 
 \begin{multicols}{2}
 \begin{center}
@@ -41,7 +42,7 @@ In this case, $k \approx log(n)$, therefore the runtime is $O(n*log(n))$
 \end{multicols}
 \subsubsection{via Master Theorem}
 In order to use the master theorem to solve a problem, the recurrence must be of the form:
-$T(n) = aT(\frac{n}{b})+f(n)$
+$T(n) = aT(\frac{n}{b})+f(n)$ where a and b are constants.
 There are three cases for the master theorem, in each case it must be \textbf{polynominally} larger/smaller for the case to apply.
 
 \begin{enumerate}
@@ -83,11 +84,11 @@ on all $i \leq 0 \leq num\_intervals$  and stored it in $V[i]$, then our runtime
 The goal of this problem is to find the maximum set of weights whose sum is less than $W$.
 The recurrence used to solve this is $OPT(i, W) = max[w_i + OPT(i - 1, W - w_i), OPT(i-1, W)]$ (if $w_i < W$ then: $OPT(i, W) = OPT(i-1, W)$).
 Where $W$ is the max weight, $w_i$ is the weight of object $i$. Typically, the output from the OPT 
-function is memoized into a 2d array, resulting in a pesudo-polynomial time complexity of $O(n * W)$
+function is memoized into a 2d array, resulting in a pseudo-polynomial (see section 4) time complexity of $O(n * W)$
 
 \subsection{Sequence Alignment}
 Given two strings X and Y, an alignment M of X and Y is obtained by inserting spaces into or
-before or after the ends of X and Y so that the resulting two strings $X'$ and $Y'$  have the samenumber of characters.
+before or after the ends of X and Y so that the resulting two strings $X'$ and $Y'$  have the same number of characters.
 The cost of an alignment will be $(g * c_g) + (m + c_m)$ where $g$ is the gaps added, $m$ is the mismatches, and $c_g$, $c_m$
 are the costs for adding a gap and having a mismatch, respectively.
 The recurrence representing this is: $OPT(i, j) = min[a_{x_iy_j} + OPT(i - 1, j - 1),\delta + OPT(i - 1, j), \delta + OPT(i, j - 1)]$
@@ -100,7 +101,7 @@ the length of each of the strings.
 Accomplishes the same thing as Djikstra's algorithms while also allowing for negative
 weight edges. The recurrence for solving this is on the right.
 Where $w$ represents an intermediate vertex, $c_{vw}$ represents the cost from going from $v$ to $w$,
-$v$ represents the starting vertex, and $i$ represents the length of the path. 
+$v$ represents the starting vertex, and $i$ represents the length of the path.
 \columnbreak
 
 $OPT(n) = \begin{cases}
@@ -118,18 +119,44 @@ networks.
 
 \subsection{Maximum Flow Problem}
 The max flow problem represents a problem in which we want to find the maximum flow between
-2 edges (a source, typically denoted with $s$, and a sink, typically denoted with $t$). 
+2 edges (a source, typically denoted with $s$, and a sink, typically denoted with $t$). These
+are generally proved by verifying the capacity and conservation conditions.
 
 \subsection{Ford-Fulkerson Algorithm}
 The Ford-Fulkerson Algorithm works by finding a simple path $p$ beetween $s$ and $t$, then finding
 the edge with the least capacity on that path and augmenting each node with that value.
 Note that you can go against the direction of an edge in the graph so long as you subtract when augmenting
-it's capacity.
-This is then repeated until no paths between $s$ and $t$ with a nonzero capacity exist. 
+it's capacity. This is then repeated until no paths between $s$ and $t$ with a nonzero capacity exist.
+This algorithm has a time complexity of O(mC), where m is the number of edges and C is the max flow
+value.
+
+
+To prove maximum flow problems, you have to verify the capacity and conservation conditions. 
+To prove capacity, you prove that 0 <= f'(e) <= $c_e$ where f' is a new flow and $c_e$ is the 
+capacity of the edge. There are two cases, the forward and backward edge. You prove the $c_e$ 
+condition for forward edges and the 0
+condition for backward edges. For the conservation condition, you need to check the change in 
+the amount of flow entering v is the same as the change in the amount of flow exiting v. There 
+There are four cases to check depending on whether the edge that enters v is a forward or a backward 
+edge, and whether the edge that exits v is a forward or a backward 
+edge. Note that a forward edge entering v means that you add b to the flow value while 
+backward edge at v means you subtract b from the flow value.
 
 \subsection{Maximum Flow and Minimum Cut in a Network}
 The min cut refers to the minimum set of edges that would have to be removed such that there is no longer
 a path from $s$ to $t$. The capacity of the cut edges is equal to the maximum flow of the network.
+You create a min-cut by drawing a line from top to bottom across the network. There are two distinct
+notations used to describe min-cuts. The A-B notation says that if you have a set of vertices in A
+and one in B, the min cut == max flow is the sum of all the edges intersected by your drawn line to
+create those groups. You can also specify it based on the edges themselves, creating a set of edges
+that will be intersected. 
+
+\section{Misc. Information}
+Runtimes:
+- Pseudo-polynomial time: When the runtime is based of the size of the input, for example checking
+if a number is prime. Taking the size of the input in bits into consideration, the algorithm is
+exponential, but ignoring that it seems as if it is linear. 
+
 
 \end{document}
 
