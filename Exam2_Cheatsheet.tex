@@ -46,8 +46,14 @@ There are three cases for the master theorem, in each case it must be \textbf{po
 
 \begin{enumerate}
     \item (Leaf-Heavy) if $f(n) < n^{log_b(a)}$, then  $T(n) = O(n^{log_b(a)})$
+    \begin{itemize}
+        \item polynomially smaller: $f(n)$ must be smaller than $n^{\log_b(a)}$ by a factor of $n^{\epsilon}$
+    \end{itemize}
     \item if $f(n) = n^{log_b(a)}$, then $T(n) = O(n^{log_b(a)}log(n))$
     \item (Root-Heavy) if $f(n) > n^{log_b(a)}$, then $T(n) = O(f(n))$ (Note: must also satisfy the regularity condition $af(n/b) \leq cf(n)$, $c < 1$)
+    \begin{itemize}
+        \item polynomially larger: $f(n)$ must be smaller than $n^{\log_b(a)}$ by a factor of $n^{\epsilon}$
+    \end{itemize}
 \end{enumerate}
 
 \subsection{Merge Sort}
@@ -70,7 +76,7 @@ that your algorithm correctly implements the recurrence
 \subsection{Weighted Interval Scheduling}
 Same as interval scheduling problem except that each interval has a weight attached to it. 
 The recurrence $OPT(i) = max[OPT(v_i) + p_i, OPT(i - 1)]$ where $i$ is the $i^{th}$ router, $v(i)$
-is a function that returns the interval immediately preceeding the $i^{th}$ interval without overlapping with it, 
+is a function that returns the interval immediately preceding the $i^{th}$ interval without overlapping with it, 
 and $p_i$ is the weight of the $i^{th}$ interval. The runtime for this solution is $O(n)$ when $v(i)$ is 
 represented with a memoized array (see 2.2).
 
@@ -90,7 +96,19 @@ Given two strings X and Y, an alignment M of X and Y is obtained by inserting sp
 before or after the ends of X and Y so that the resulting two strings $X'$ and $Y'$  have the samenumber of characters.
 The cost of an alignment will be $(g * c_g) + (m + c_m)$ where $g$ is the gaps added, $m$ is the mismatches, and $c_g$, $c_m$
 are the costs for adding a gap and having a mismatch, respectively.
-The recurrence representing this is: $OPT(i, j) = min[a_{x_iy_j} + OPT(i - 1, j - 1),\delta + OPT(i - 1, j), \delta + OPT(i, j - 1)]$
+The recurrence representing this is: $OPT(i, j) = min[a_{x_iy_j} + OPT(i - 1, j - 1),\delta + OPT(i - 1, j), \delta + OPT(i, j - 1)]$ \\ 
+$(i,j)$ is part of the optimal solution only if the first term is the minimum.
+
+Algorithm:
+\begin{itemize}
+    \item Array [m, n]
+    \item initialize $A[i, 0] = i\delta$
+    \item initialize $A[0, j] = j\delta$
+    \item for j=1...n
+    \item \quad for i=1...m
+    \item \quad \quad Use recurrence
+    \item Return A[m, n]
+\end{itemize}
 
 \noindent The output of $OPT$ is typically memoized into a 2d array, and results in a runtime of $O(m * n)$ where $m$ and $n$ represent
 the length of each of the strings.
@@ -131,5 +149,12 @@ This is then repeated until no paths between $s$ and $t$ with a nonzero capacity
 The min cut refers to the minimum set of edges that would have to be removed such that there is no longer
 a path from $s$ to $t$. The capacity of the cut edges is equal to the maximum flow of the network.
 
-\end{document}
+\subsection{Induction w/ two variables}
+\begin{itemize}
+    \item Prove induction on i+j
+    \item Base Case: When i+j = 0
+    \item Inductive Hypothesis: Assume that for $0 \le i' + j' < i+j$, $OPT(i', j')$ is correct
+    \item Inductive step: Prove  $OPT(i, j)$
+\end{itemize}
 
+\end{document}
