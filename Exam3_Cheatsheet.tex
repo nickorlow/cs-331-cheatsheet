@@ -33,6 +33,9 @@ verified in polynomial time can also be solved in polynomial time.
 \underline{Proving NP-Complete via reduction:} If we wanted to prove that the Undirected Hamiltonian Path Problem 
 is NP-Complete, we would reduce the Directed Hamiltonian Path Problem (which is NP-Complete) to it.
 
+\underline{Proving NP-Hardvia reduction:} If we wanted to prove that the Undirected Hamiltonian Path Problem 
+is NP-Complete, we would reduce the Directed Hamiltonian Path Problem (which is NP-Complete) to it.
+
 \section{Graph Coloring}
 Given a graph $G = (V, E)$, find the smallest number of different colors to assign for 
 each nod ein $G$ so that no two nodes of the same color share an edge. Decision version: 
@@ -45,11 +48,28 @@ When $k=3$, we must prove that it is NP-Complete by reducing it to 3-SAT (2-SAT 
 \section{Approximation}
 \subsection{Load Balancing}
 \subsection{Vertex Cover}
+The vertex cover problem is a problem in which you want to find a set $S$ of verticies in a graph such that
+every edge connects to one of the verticies in $S$.
+
 \subsection{Set Cover}
+The set cover problem is a problem in which you are given a set $M$ of sets and a set $U$ of numbers. Your
+goall is to find a union of some sets in $M$ such that their union equals $U$
+
 \section{PSPACE and PSPACE-Completeness}
+PSPACE is the set of decision problems that can be solved by a Turing Machine with a polynomial amount of
+space. 
+
+PSPACE-Completeness refers to a PSPACE problem in which every other PSPACE problem could be transformed to it in 
+polynomial time
+
 \section{Turing Machines}
+
+
 \section{Undecidability and Halting problem}
+
+
 \section{Randomized Algorithms}
+
 \section{Misc}
 
 
