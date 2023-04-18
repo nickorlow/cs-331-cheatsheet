@@ -10,17 +10,44 @@
 \subsubsectionfont{\fontsize{9}{9}\selectfont}
 \usepackage[compact]{titlesec}
 \usepackage{enumitem}
+\setlength{\parindent}{0pt} 
 \setlist[1]{itemsep=-5pt}
 \setlist[2]{itemsep=-5pt}
 \begin{document}
 \underline{This document is currently incomplete - Information may be incorrect - Please contribute on GitHub!}
+
 \section{P, NP, NP-Completness}
+
+\underline{P:} Generally refers to problems that can be solved in polynomial time
+
+\underline{NP:} Generally refers to problems that can have their solution verified in polynomial time
+
+\underline{NP-Complete:} A problem in NP in which a polynomial-time algorithm that can reduce
+the it into any other NP-Complete problem. 
+
+\underline{NP-Hard:} A set of problems that are hard to solve and verify, with some problems not being decideable. Reducable to any problem in NP
+
+\underline{P vs NP:} The P vs NP problem is an unsolved problem on wether a problem whose solution can be
+verified in polynomial time can also be solved in polynomial time. 
+
+\underline{Proving NP-Complete via reduction:} If we wanted to prove that the Undirected Hamiltonian Path Problem 
+is NP-Complete, we would reduce the Directed Hamiltonian Path Problem (which is NP-Complete) to it.
+
 \section{Graph Coloring}
+Given a graph $G = (V, E)$, find the smallest number of different colors to assign for 
+each nod ein $G$ so that no two nodes of the same color share an edge. Decision version: 
+Given a graph $G$ and a bound $k$, does $G$ have k-coloring?
+
+Simple when $k=2$ since you just need to check if $G$ is bipartite
+
+When $k=3$, we must prove that it is NP-Complete by reducing it to 3-SAT (2-SAT $\leq_p$ 3-Coloring)
+
 \section{Approximation}
 \subsection{Load Balancing}
 \subsection{Vertex Cover}
 \subsection{Set Cover}
 \section{PSPACE and PSPACE-Completeness}
+\section{Turing Machines}
 \section{Undecidability and Halting problem}
 \section{Randomized Algorithms}
 \section{Misc}
