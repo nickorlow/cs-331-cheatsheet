@@ -75,6 +75,14 @@ polynomial time
 
 
 \section{Undecidability and Halting problem}
+An undecidable problem is a problem in which no algorithm can produce a correct response on every
+input. In order to prove a problem is undecidable, we can reduce another undecidable problem to it, 
+or we can use a proof by contradiction by specifying a scenario in which it wouldn't be possible
+to return a correct result (how the Halting problem is commonly proved).
+
+The halting problem is an undecidable problem that takes a function and some input as input. It then returns
+wether this program will run forever or if it will eventually halt. It is undecidable because a theoretical
+function $C(X) -> if H(X,X) == 'HALT' then LOOP else HALT$ would generate an incorrect output if $C(C)$ is called.
 
 
 \section{Randomized Algorithms}
