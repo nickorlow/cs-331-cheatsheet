@@ -93,7 +93,7 @@ possible actions based on the value of the current cell is represented as an edg
 some next state. We can represent the state of a turing machine as a list of the cells, with the head at the position
 before the cell it is currently reading. The head will be represented by a symbol which represents the current state.
 
-\begin{multicols*}{2}
+\begin{multicols}{2}
     
 
 For example, these plain english instructions:
@@ -127,10 +127,12 @@ $\delta(q_1, \sqcup)  = (q_1, a, /)$
 
 $\delta(q_1, a)  = (q_accept, /, /)$
 
-\end{multicols*}
+\end{multicols}
 
 This can also be represented by the following FSM:
 
+\begin{multicols}{2}
+    
 
 \begin{tikzpicture}[node distance={30mm}, main/.style = {draw, circle}] 
     \node[main] (0)  {$q_0$};
@@ -143,6 +145,20 @@ This can also be represented by the following FSM:
     \path (0) edge [out=200,in=250,looseness=15] node[below] {$a -> b, /$} (0);
     \path [->] (1) edge node [below] {$a -> a, /$} (2);
 \end{tikzpicture}
+
+\columnbreak
+
+So a machine in the state $q_0 a \sqcup\sqcup$ would transition through the following states:
+
+$q_0 a \sqcup\sqcup$
+
+$q_0 b \sqcup\sqcup$
+
+$a q_1 a\sqcup$
+
+$a q_{accept} a\sqcup$
+
+\end{multicols}
 
 \section{Undecidability and Halting problem}
 An undecidable problem is a problem in which no algorithm can produce a correct response on every
