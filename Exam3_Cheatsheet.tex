@@ -30,11 +30,8 @@ the it into any other NP-Complete problem.
 \underline{P vs NP:} The P vs NP problem is an unsolved problem on wether a problem whose solution can be
 verified in polynomial time can also be solved in polynomial time. 
 
-\underline{Proving NP-Complete via reduction:} If we wanted to prove that the Undirected Hamiltonian Path Problem 
-is NP-Complete, we would reduce the Directed Hamiltonian Path Problem (which is NP-Complete) to it.
-
-\underline{Proving NP-Hardvia reduction:} If we wanted to prove that the Undirected Hamiltonian Path Problem 
-is NP-Complete, we would reduce the Directed Hamiltonian Path Problem (which is NP-Complete) to it.
+\underline{Proving NP-X via reduction:} If we wanted to prove that Problem A is NP-X
+, we would reduce Problem B (which is known to be NP-X) to it ($A \leq_p B$). 
 
 \section{Graph Coloring}
 Given a graph $G = (V, E)$, find the smallest number of different colors to assign for 
@@ -55,15 +52,15 @@ $N$-approximation means that the solution is within $OPT*N$
 
 In order to do this, find the worst case and then find a way to relate it to the best case.
 
-\subsection{Load Balancing}
+\subsection{Load Balancing (NP-Hard)}
 This problem is an example for an approx. algirhthm. Given $M$ machines $m_1, m_2, ..., m_n$ and $n$ jobs where each job $j$ has a processing time
 $t_j$, assign each job to a machine and balance the loads across all machines.
 
-\subsection{Vertex Cover}
+\subsection{Vertex Cover (NP-Hard)}
 The vertex cover problem is a problem in which you want to find a set $S$ of verticies in a graph such that
 every edge connects to one of the verticies in $S$.
 
-\subsection{Set Cover}
+\subsection{Set Cover (Search: NP-Hard, Decision: NP-Complete)}
 The set cover problem is a problem in which you are given a set $M$ of sets and a set $U$ of numbers. Your
 goall is to find a union of some sets in $M$ such that their union equals $U$
 
