@@ -134,21 +134,14 @@ This can also be represented by the following FSM:
 
 \begin{tikzpicture}[node distance={30mm}, main/.style = {draw, circle}] 
     \node[main] (0)  {$q_0$};
-   
     \node[main] (1) [right of=0] {$q_1$};
-
     \node[main] (2)  [right of=1] {$q_{accept}$};
-
-    \draw (1) to [out=330,in=300,looseness=8] (1)
 
     \path [->,bend left=10] (0) edge node [above] {$a -> a, R$} (1);
     \path [->,bend left=10] (1) edge node [below] {$b -> a, /$} (0);
-
+    \path (1) edge [out=330,in=300,looseness=25] node[below] {$\sqcup -> a, /$} (1);
+    \path (0) edge [out=200,in=250,looseness=15] node[below] {$a -> b, /$} (0);
     \path [->] (1) edge node [below] {$a -> a, /$} (2);
-
-
-
-   
 \end{tikzpicture}
 
 \section{Undecidability and Halting problem}
