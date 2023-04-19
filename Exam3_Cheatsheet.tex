@@ -5,6 +5,7 @@
 \usepackage[nomarginpar, margin=.1in]{geometry}
 \usepackage{sectsty}
 \usepackage{amsmath}
+\usepackage{tikz} 
 \sectionfont{\fontsize{9}{9}\selectfont}
 \subsectionfont{\fontsize{9}{9}\selectfont}
 \subsubsectionfont{\fontsize{9}{9}\selectfont}
@@ -42,6 +43,17 @@ Simple when $k=2$ since you just need to check if $G$ is bipartite
 
 When $k=3$, we must prove that it is NP-Complete by reducing it to 3-SAT (2-SAT $\leq_p$ 3-Coloring)
 
+\section{Hamiltonian}
+\subsection{Hamiltonian Cycle (NP-Hard)}
+Does a graph $G = (V, E)$ have a cycle $P$ such that for all $v$ in $V$, $v \in P$?
+
+\subsection{Hamiltonian Path (NP-Hard)}
+Does a graph $G = (V, E)$ have a path $P$ such that for all $v$ in $V$, $v \in P$?
+Typically when reducing a problem to hamiltonian path, we want to add 2 extra verticies denoting
+where we want the path to start and end. If we wanted to test if there is a hamiltonian path from 
+$v_0$ to $v_5$, then we would create nodes $s$ and $t$ and create edges $(s, v_0)$ and $(v_5, t)$
+and then check if a path from $s$ to $t$ exists.
+
 \section{Approximation}
 \underline{Linear Programming:} Given a set of inequalities that represent constraints, our
 goal is to minimize or maxamize a certain quantity represented 
@@ -72,7 +84,72 @@ PSPACE-Completeness refers to a PSPACE problem in which every other PSPACE probl
 polynomial time
 
 \section{Turing Machines}
+A turing machine is an abstract machine that given enough time and space can solve any problem. It
+is typically represented as a list of cells that has a head which moves to a certain cell, reads a value
+and then depending on it's state, usually denoted by $q_n$, it decides what to write to the current cell,
+and where to move the head next. The list of states and their outputs can be represented as a series of functions, 
+or it can be represented visually as a FSM (Finite State Machine) where each state has a vertex on a graph, and the
+possible actions based on the value of the current cell is represented as an edge that specifies direction and then 
+some next state. We can represent the state of a turing machine as a list of the cells, with the head at the position
+before the cell it is currently reading. The head will be represented by a symbol which represents the current state.
 
+\begin{multicols*}{2}
+    
+
+For example, these plain english instructions:
+
+State $q_0$:
+
+If cell has value $a$ then go to state $q_0$ and set cell to $b$ and do not move head.
+
+If cell has value $b$ then go to state $q_1$ and move to the right one cell.
+
+State $q_1$:
+
+If cell has value $b$ then go to state $q_0$ and set cell to $a$
+
+If cell has no value ($\sqcup$) then go to state $q_1$ and set the cell to $a$
+
+If cell has value $a$ then go to state $q_{accept}$ (i.e. HALT)
+
+\columnbreak
+
+Can be represented by the functions:
+
+
+$\delta(q_0, a)  = (q_0, b, /)$
+
+$\delta(q_0, b)  = (q_1, /, R)$
+
+$\delta(q_1, b)  = (q_0, a, /)$
+
+$\delta(q_1, \sqcup)  = (q_1, a, /)$
+
+$\delta(q_1, a)  = (q_accept, /, /)$
+
+\end{multicols*}
+
+This can also be represented by the following FSM:
+
+
+\begin{tikzpicture}[node distance={30mm}, main/.style = {draw, circle}] 
+    \node[main] (0)  {$q_0$};
+   
+    \node[main] (1) [right of=0] {$q_1$};
+
+    \node[main] (2)  [right of=1] {$q_{accept}$};
+
+    \draw (1) to [out=330,in=300,looseness=8] (1)
+
+    \path [->,bend left=10] (0) edge node [above] {$a -> a, R$} (1);
+    \path [->,bend left=10] (1) edge node [below] {$b -> a, /$} (0);
+
+    \path [->] (1) edge node [below] {$a -> a, /$} (2);
+
+
+
+   
+\end{tikzpicture}
 
 \section{Undecidability and Halting problem}
 An undecidable problem is a problem in which no algorithm can produce a correct response on every
