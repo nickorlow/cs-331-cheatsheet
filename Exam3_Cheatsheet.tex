@@ -62,9 +62,9 @@ Simple when $k=2$ since you just need to check if $G$ is bipartite
 When $k=3$, we must prove that it is NP-Complete by reducing 3-SAT to it (3-SAT $\leq_p$ 3-Coloring)
 
 Can be extended to k-Coloring: Add dummy vertices and extra colors accordingly.
-\subsection{Hamiltonian Path (NP-Hard)}
-Does a graph $G = (V, E)$ have a path $P$ such that for all $v$ in $V$, $v \in P$?
-Typically when reducing a problem to hamiltonian path, we want to add 2 extra verticies denoting
+\subsection{Hamiltonian Path/Cycle (NP-Hard)}
+Does a graph $G = (V, E)$ have a path/cycle $P$ such that for all $v$ in $V$, $v \in P$?
+Typically when reducing a problem to hamiltonian \textbf{path}, we want to add 2 extra verticies denoting
 where we want the path to start and end. If we wanted to test if there is a hamiltonian path from 
 $v_0$ to $v_5$, then we would create nodes $s$ and $t$ and create edges $(s, v_0)$ and $(v_5, t)$
 and then check if a path from $s$ to $t$ exists. A hamiltonian cycle is a path that ends at the
