@@ -231,12 +231,15 @@ based on the partitioning cases:
 We can represent $T(n)$ as the summation of every case multiplied by its decision variable (of wich, only one 
 will be $1$ and the rest will be $0$)
 
-$T(n) = \sum{j=1}^{n}(X_j(T(max\{j-1, n-j\}) + O(n)))$
+$T(n) = \sum_{j=1}^{n}(X_j(T(max\{j-1, n-j\}) + O(n)))$
 
 We then want to calculate the expectation of $T(n)$, which through a bunch of fancy algebra that
 I don't have space for results in:
 
 $\frac{1}{4}c.n - O(N)$ where $c \geq 4 *$ constant of $O$
+
+\subsection{Randomized Median Finding Runtime Summary}
+The proof shows that the randomized algorithm has an expected running time of $\frac{1}{4}cn + O(n)$, where $c$ is a constant. This is faster than the worst-case running time of the deterministic algorithm, which is $O(n^2)$, under certain assumptions about the distribution of the input. Thus, on average, the randomized algorithm is faster than the deterministic algorithm for finding the median of an unsorted list.
 
 \section{Misc}
 
