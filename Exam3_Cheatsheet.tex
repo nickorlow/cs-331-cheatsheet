@@ -48,8 +48,7 @@ each nod ein $G$ so that no two nodes of the same color share an edge. Decision 
 Given a graph $G$ and a bound $k$, does $G$ have k-coloring?
 
 Simple when $k=2$ since you just need to check if $G$ is bipartite
-
-When $k=3$, we must prove that it is NP-Complete by reducing it to 3-SAT (2-SAT $\leq_p$ 3-Coloring)
+When $k=3$, we must prove that it is NP-Complete by reducing 3-SAT to it (3-SAT $\leq_p$ 3-Coloring)
 
 \section{Hamiltonian}
 \subsection{Hamiltonian Cycle (NP-Hard)}
@@ -186,7 +185,10 @@ function $C(X) -> if H(X,X) == 'HALT' then LOOP else HALT$ would generate an inc
 Expectance is equal to a value multiplied by the chance that that that value will occur
 (this is the average value taken by a random variable)$E(x) = \sum XP(X)$
 
-\subsection{Ramdomized Median Finding Proof}
+
+\subsection{Randomized Median Finding Runtime Summary}
+The proof shows that the randomized algorithm has an expected running time of $\frac{1}{4}cn + O(n)$, where $c$ is a constant. This is faster than the worst-case running time of the deterministic algorithm, which is $O(n^2)$, under certain assumptions about the distribution of the input. Thus, on average, the randomized algorithm is faster than the deterministic algorithm for finding the median of an unsorted list.
+
 
 \section{Misc}
 
