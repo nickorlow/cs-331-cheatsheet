@@ -13,7 +13,7 @@
 \usepackage{enumitem}
 \setlength{\parindent}{0pt} 
 \setlist[1]{itemsep=-5pt}
-\setlist[2]{itemsep=-5pt}
+\setlist[2]{itemsep=-5pt} 
 \begin{document}
 \underline{This document is currently incomplete - Information may be incorrect - Please contribute on GitHub!}
 
@@ -31,16 +31,30 @@ the it into any other NP-Complete problem. To prove NP-complete, prove that it i
 \underline{P vs NP:} The P vs NP problem is an unsolved problem on whether a problem whose solution can be
 verified in polynomial time can also be solved in polynomial time. 
 
-$Y \le_p X$ means "reducible in polynomial time to" or "$X$ is at least as hard as $Y$. This is proven by reducing $Y$ to $X$
+\underline{P vs NP:} The P vs NP problem is an unsolved problem on wether a problem whose solution can be
+verified in polynomial time can also be solved in polynomial time. 
 
-To prove reduction:
-\begin{itemize}
-    \item Transform $Y$ using reduction and prove that reduction is instance of $X$ (if and only if)
-    \item Show that reduction is achieved in polynomial time. Shown by proving that algorithm runs in polynomial time and call "black box" polynomial times.
-\end{itemize}
+\underline{Vertex Cover:} Set of vertices is a vertex cover if every edge has an endpoint within the
+set.
+
+\underline{Independent Set:} Set of vertices is an independent set if no two vertices in the set
+share an edge. Related to V.C.: |V.C.| = V - |I.S.|
+
+\underline{Set Cover:} Collection of sets whose union is all the elements in the set of sets.
+
 
 \underline{Proving NP-X via reduction:} If we wanted to prove that Problem B is NP-X
 , we would reduce Problem A (which is known to be NP-X) to it ($A \leq_p B$). 
+
+$Y \le_p X$ means "reducible in polynomial time to" or "$X$ is at least as hard as $Y$. This is proven by reducing $Y$ to $X$
+
+Reduction is done by showing that Y can be solved using a polynomial number of steps and a
+polynomial number of calls to a black box that solves X. Proved using a bijection showing that the
+reduced version of Y is an instance of X and vice versa.
+
+\underline{Satisfiability/SAT/3-SAT} A formula consisting of clauses with 3 literals per clause.
+Between clauses are ANDs and between literals are ORs. The formula is satisifiable if I can make it
+true. It is NP-Complete.
 
 \section{Graph Coloring}
 Given a graph $G = (V, E)$, find the smallest number of different colors to assign for 
@@ -50,16 +64,14 @@ Given a graph $G$ and a bound $k$, does $G$ have k-coloring?
 Simple when $k=2$ since you just need to check if $G$ is bipartite
 When $k=3$, we must prove that it is NP-Complete by reducing 3-SAT to it (3-SAT $\leq_p$ 3-Coloring)
 
-\section{Hamiltonian}
-\subsection{Hamiltonian Cycle (NP-Hard)}
-Does a graph $G = (V, E)$ have a cycle $P$ such that for all $v$ in $V$, $v \in P$?
-
+Can be extended to k-Coloring: Add dummy vertices and extra colors accordingly.
 \subsection{Hamiltonian Path (NP-Hard)}
 Does a graph $G = (V, E)$ have a path $P$ such that for all $v$ in $V$, $v \in P$?
 Typically when reducing a problem to hamiltonian path, we want to add 2 extra verticies denoting
 where we want the path to start and end. If we wanted to test if there is a hamiltonian path from 
 $v_0$ to $v_5$, then we would create nodes $s$ and $t$ and create edges $(s, v_0)$ and $(v_5, t)$
-and then check if a path from $s$ to $t$ exists.
+and then check if a path from $s$ to $t$ exists. A hamiltonian cycle is a path that ends at the
+start.
 
 \section{Approximation}
 \underline{Linear Programming:} Given a set of inequalities that represent constraints, our
@@ -73,17 +85,15 @@ In order to do this, find the worst case and then find a way to relate it to the
 A good way to do this is to try to think of inputs that would be really bad for the algorithm
 and then try to deduce why it may be bad
 
+General idea: Find the bounds for T* and try to relate them to T.
+
+Maximization: T*/T $\leq$ k
+
+Minimization: T/T* $\leq$ k
+
 \subsection{Load Balancing (NP-Hard)}
-This problem is an example for an approx. algirhthm. Given $M$ machines $m_1, m_2, ..., m_n$ and $n$ jobs where each job $j$ has a processing time
+This problem is an example for an approx. algorithm. Given $M$ machines $m_1, m_2, ..., m_n$ and $n$ jobs where each job $j$ has a processing time
 $t_j$, assign each job to a machine and balance the loads across all machines.
-
-\subsection{Vertex Cover (NP-Hard)}
-The vertex cover problem is a problem in which you want to find a set $S$ of verticies in a graph such that
-every edge connects to one of the verticies in $S$.
-
-\subsection{Set Cover (Search: NP-Hard, Decision: NP-Complete)}
-The set cover problem is a problem in which you are given a set $M$ of sets and a set $U$ of numbers. Your
-goall is to find a union of some sets in $M$ such that their union equals $U$
 
 \section{PSPACE and PSPACE-Completeness}
 $P \subset NP \subset PSPACE \subset $ everything else\\
@@ -92,6 +102,10 @@ space.
 
 PSPACE-Completeness refers to a PSPACE problem in which every other PSPACE problem could be transformed to it in 
 polynomial time
+
+P, NP is solvable in PSPACE. Unknown if NP = PSPACE.
+
+One example: QSAT. Like SAT but the literals are exchanged between either-or and for-all.
 
 \section{Turing Machines}
 A turing machine is an abstract machine that given enough time and space can solve any problem. It
@@ -102,6 +116,8 @@ or it can be represented visually as a FSM (Finite State Machine) where each sta
 possible actions based on the value of the current cell is represented as an edge that specifies direction and then 
 some next state. We can represent the state of a turing machine as a list of the cells, with the head at the position
 before the cell it is currently reading. The head will be represented by a symbol which represents the current state.
+A Turing machine loops forever unless it reaches either the accept or reject
+state.
 
 \begin{multicols}{2}
     
@@ -169,6 +185,15 @@ $a q_1 a\sqcup$
 $a q_{accept} a\sqcup$
 
 \end{multicols}
+
+\subsection{Formal languages/Recognizability}
+A formal language is a set of strings which are a finite sequence of symbols from an alphabet. And
+alphabet is a finite set of symbols.
+
+A language is recognizable if a Turing machine can be constructed that will accept all strings in
+the language. It is decidable if all inputs halt.
+
+A universal Turing machine is a Turing machine that can simulate another.
 
 \section{Undecidability and Halting problem}
 An undecidable problem is a problem in which no algorithm can produce a correct response on every
