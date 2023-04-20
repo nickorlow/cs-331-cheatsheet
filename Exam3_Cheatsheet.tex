@@ -58,6 +58,7 @@ and then check if a path from $s$ to $t$ exists.
 \underline{Linear Programming:} Given a set of inequalities that represent constraints, our
 goal is to minimize or maxamize a certain quantity represented 
 by an equation.
+
 $N<1$-approximations is typically used to represent maxamization problems while
 an $N>1$-approximation is typically used to represent a minimization problem. 
 $N$-approximation means that the solution is within $OPT*N$
@@ -66,11 +67,11 @@ In order to do this, find the worst case and then find a way to relate it to the
 A good way to do this is to try to think of inputs that would be really bad for the algorithm
 and then try to deduce why it may be bad
 
-\subsection{Load Balancing (NP-Hard)}
+\subsection{Load Balancing (Search: NP-Hard, Decision: NP-Complete)}
 This problem is an example for an approx. algirhthm. Given $M$ machines $m_1, m_2, ..., m_n$ and $n$ jobs where each job $j$ has a processing time
 $t_j$, assign each job to a machine and balance the loads across all machines.
 
-\subsection{Vertex Cover (NP-Hard)}
+\subsection{Vertex Cover (Search: NP-Hard, Decision: NP-Complete))}
 The vertex cover problem is a problem in which you want to find a set $S$ of verticies in a graph such that
 every edge connects to one of the verticies in $S$.
 
@@ -177,7 +178,23 @@ function $C(X) -> if H(X,X) == 'HALT' then LOOP else HALT$ would generate an inc
 Expectance is equal to a value multiplied by the chance that that that value will occur
 (this is the average value taken by a random variable)$E(x) = \sum XP(X)$
 
-\subsection{Ramdomized Median Finding Proof}
+\subsection{Randomized Median Finding Runtime}
+Given an unsorted list $L$, we want to find the median value of that list. To do this, 
+we can create an algorithm where we choose a \underline{splitter} $s$, then put every element
+larger than $s$ into $S+$ and every element less than $s$ into $S-$. Then, if  $|S-|$ is
+equal to $\frac{L}{2}-1$, then $s$ is the median. If $|S-| \geq \frac{L}{2}-1$, then we will
+recursively call our function on $|S-|$, else, we eill recursively call our function on $S+$. 
+
+Choosing the splitter can havae major effects on the runtime of the algorithm.
+
+We could choose the splittern in a deterministic way by choosing the first element in the list.
+
+Another (non-deterministic) approach is to choose a number in the list uniformly at random. 
+
+The running time of the algorithm will depend on luck of choosing our splitter. In the worst case, 
+It will be $O(n^2)$ if we repedeatly choose the largest element in $L$, since the smallest element
+will be in $|S-|$ and each iteration $|S-|$ will be one element smaller than it was last call: $T(n) \leq T(n-1) + c.n$
+where $n = |L|$
 
 \section{Misc}
 
