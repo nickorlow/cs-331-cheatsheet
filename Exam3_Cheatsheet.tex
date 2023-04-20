@@ -21,15 +21,23 @@
 
 \underline{P:} Generally refers to problems that can be solved in polynomial time
 
-\underline{NP:} Generally refers to problems that can have their solution verified in polynomial time
+\underline{NP:} Generally refers to problems that can have their solution verified in polynomial time. To show if a problem is NP, show a solution and a verifier.
 
 \underline{NP-Complete:} A problem in NP in which a polynomial-time algorithm that can reduce
-the it into any other NP-Complete problem. 
+the it into any other NP-Complete problem. To prove NP-complete, prove that it is NP and reduce another NP problem to it.
 
-\underline{NP-Hard:} A set of problems that are hard to solve and verify, with some problems not being decideable. Reducable to any problem in NP
+\underline{NP-Hard:} A set of problems that are hard to solve and verify, with some problems not being decideable. Reducable to any problem in NP. To prove, reduce a known NP-complete problem to it in polynomial time.
 
-\underline{P vs NP:} The P vs NP problem is an unsolved problem on wether a problem whose solution can be
+\underline{P vs NP:} The P vs NP problem is an unsolved problem on whether a problem whose solution can be
 verified in polynomial time can also be solved in polynomial time. 
+
+$Y \le_p X$ means "reducible in polynomial time to" or "$X$ is at least as hard as $Y$. This is proven by reducing $Y$ to $X$
+
+To prove reduction:
+\begin{itemize}
+    \item Transform $Y$ using reduction and prove that reduction is instance of $X$ (if and only if)
+    \item Show that reduction is achieved in polynomial time. Shown by proving that algorithm runs in polynomial time and call "black box" polynomial times.
+\end{itemize}
 
 \underline{Proving NP-X via reduction:} If we wanted to prove that Problem B is NP-X
 , we would reduce Problem A (which is known to be NP-X) to it ($A \leq_p B$). 
@@ -41,7 +49,7 @@ Given a graph $G$ and a bound $k$, does $G$ have k-coloring?
 
 Simple when $k=2$ since you just need to check if $G$ is bipartite
 
-When $k=3$, we must prove that it is NP-Complete by reducing it to 3-SAT (3-Coloring $\leq_p$ 3-SAT)
+When $k=3$, we must prove that it is NP-Complete by reducing it to 3-SAT (2-SAT $\leq_p$ 3-Coloring)
 
 \section{Hamiltonian}
 \subsection{Hamiltonian Cycle (NP-Hard)}
@@ -58,7 +66,6 @@ and then check if a path from $s$ to $t$ exists.
 \underline{Linear Programming:} Given a set of inequalities that represent constraints, our
 goal is to minimize or maxamize a certain quantity represented 
 by an equation.
-
 $N<1$-approximations is typically used to represent maxamization problems while
 an $N>1$-approximation is typically used to represent a minimization problem. 
 $N$-approximation means that the solution is within $OPT*N$
@@ -67,11 +74,11 @@ In order to do this, find the worst case and then find a way to relate it to the
 A good way to do this is to try to think of inputs that would be really bad for the algorithm
 and then try to deduce why it may be bad
 
-\subsection{Load Balancing (Search: NP-Hard, Decision: NP-Complete)}
+\subsection{Load Balancing (NP-Hard)}
 This problem is an example for an approx. algirhthm. Given $M$ machines $m_1, m_2, ..., m_n$ and $n$ jobs where each job $j$ has a processing time
 $t_j$, assign each job to a machine and balance the loads across all machines.
 
-\subsection{Vertex Cover (Search: NP-Hard, Decision: NP-Complete))}
+\subsection{Vertex Cover (NP-Hard)}
 The vertex cover problem is a problem in which you want to find a set $S$ of verticies in a graph such that
 every edge connects to one of the verticies in $S$.
 
@@ -80,6 +87,7 @@ The set cover problem is a problem in which you are given a set $M$ of sets and 
 goall is to find a union of some sets in $M$ such that their union equals $U$
 
 \section{PSPACE and PSPACE-Completeness}
+$P \subset NP \subset PSPACE \subset $ everything else\\
 PSPACE is the set of decision problems that can be solved by a Turing Machine with a polynomial amount of
 space. 
 
@@ -178,68 +186,7 @@ function $C(X) -> if H(X,X) == 'HALT' then LOOP else HALT$ would generate an inc
 Expectance is equal to a value multiplied by the chance that that that value will occur
 (this is the average value taken by a random variable)$E(x) = \sum XP(X)$
 
-\subsection{Randomized Median Finding Runtime}
-Given an unsorted list $L$, we want to find the median value of that list. To do this, 
-we can create an algorithm where we choose a \underline{splitter} $s$, then put every element
-larger than $s$ into $S+$ and every element less than $s$ into $S-$. Then, if  $|S-|$ is
-equal to $\frac{L}{2}-1$, then $s$ is the median. If $|S-| \geq \frac{L}{2}-1$, then we will
-recursively call our function on $|S-|$, else, we eill recursively call our function on $S+$. 
-
-Choosing the splitter can havae major effects on the runtime of the algorithm.
-
-We could choose the splittern in a deterministic way by choosing the first element in the list.
-
-Another (non-deterministic) approach is to choose a number in the list uniformly at random. 
-
-The running time of the algorithm will depend on luck of choosing our splitter. In the worst case, 
-It will be $O(n^2)$ if we repedeatly choose the largest element in $L$, since the smallest element
-will be in $|S-|$ and each iteration $|S-|$ will be one element smaller than it was last call: $T(n) \leq T(n-1) + c.n$
-where $n = |L|$
-
-We know that the randomized algorithm has the possibility of producing outputs such that it would
-result in a worse-case runtime, but the probability that it will is much lower. To formalize this:
-
-$T(n)$, the running time of our algorithm on an input of size $n$, is a random variable as it relies 
-upon the choice of our random splitter. The algorithm will then split our problem into 2 subproblems that
-will have sizes $j-1$ and $n-j$. When choosing how to write our recurrence, we will take the \underline{maximum}
-of these 2 as we don't know if the answer will be in $S+$ or $S-$. We can now write our recurrence as:
-
-$T(n) = T(max\{j-1, n-j\}) + O(n)$
-
-We can't solve this as there is an unknown value of $j$ in the recurrence. However we can break this into cases
-by using an \textbf{indicator random variable}.
-
-We will decind $X_j$ as the indicator for choosing the $j^{th}$ smallest element from $L$ as the splitter
-where $j = 1..n$. No matter what our splitter chooses, exactly one of our indicator variables will be $1$, 
-and the rest will be $0$.
-
-Based on $j$, each time we split, one partition will be true. We can base the running time of the algorithm
-based on the partitioning cases:
-
-\begin{equation}
-    T(n) = 
-    \left\{
-        \begin{array}{lr}
-            T(max\{0, n-1\})+O(n)& \text{if } 0: (n-1) split\\
-            T(max\{1, n-2\})+O(n)& \text{if } 1: (n-2) split \\
-            ... & ... \\
-            T(max\{n-1, 0\})+O(n)& \text{if } n-1: 0 split \\
-        \end{array}
-    \right\} 
-\end{equation}
-
-We can represent $T(n)$ as the summation of every case multiplied by its decision variable (of wich, only one 
-will be $1$ and the rest will be $0$)
-
-$T(n) = \sum_{j=1}^{n}(X_j(T(max\{j-1, n-j\}) + O(n)))$
-
-We then want to calculate the expectation of $T(n)$, which through a bunch of fancy algebra that
-I don't have space for results in:
-
-$\frac{1}{4}c.n - O(N)$ where $c \geq 4 *$ constant of $O$
-
-\subsection{Randomized Median Finding Runtime Summary}
-The proof shows that the randomized algorithm has an expected running time of $\frac{1}{4}cn + O(n)$, where $c$ is a constant. This is faster than the worst-case running time of the deterministic algorithm, which is $O(n^2)$, under certain assumptions about the distribution of the input. Thus, on average, the randomized algorithm is faster than the deterministic algorithm for finding the median of an unsorted list.
+\subsection{Ramdomized Median Finding Proof}
 
 \section{Misc}
 
