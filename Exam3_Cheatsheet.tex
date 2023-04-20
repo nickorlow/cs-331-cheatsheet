@@ -77,7 +77,7 @@ start.
 \underline{Linear Programming:} Given a set of inequalities that represent constraints, our
 goal is to minimize or maxamize a certain quantity represented 
 by an equation.
-$N<1$-approximations is typically used to represent maxamization problems while
+$N<1$-approximations are typically used to represent maxamization problems while
 an $N>1$-approximation is typically used to represent a minimization problem. 
 $N$-approximation means that the solution is within $OPT*N$
 
@@ -94,6 +94,17 @@ Minimization: T/T* $\leq$ k
 \subsection{Load Balancing (NP-Hard)}
 This problem is an example for an approx. algorithm. Given $M$ machines $m_1, m_2, ..., m_n$ and $n$ jobs where each job $j$ has a processing time
 $t_j$, assign each job to a machine and balance the loads across all machines.
+
+\subsection{Representing Vertex Cover as ILP (Integer Linear Programming)}
+Create a function where $x_i = 1$ if the $i^{th}$ vertex is in the cover and 0 otherwise. We'd then multiply this by the weight of node i (if we're doing 
+weighted VC), have an objective function where we want $F = \sum_{i=1}^{n} (x_i * w_i)$ to be as small as it can be, and add the constraint 
+that for every edge (u,v) that $x_u + x_v \geq 1$ and then we ask ILP to find a solution that satisfies these constraints and minimizes $F$ 
+
+The $x_u + x_v \geq 1$ part ensures that it's a valid cover, since it requires that at least node on each edge is in the cover
+
+The $F= \sum_{i=1}^{n} (x_i * w_i)$ ensures that it's a (somewhat) efficient solution
+
+If unweighted, then $F= \sum_{i=1}^{n} (x_i )$ 
 
 \section{PSPACE and PSPACE-Completeness}
 $P \subset NP \subset PSPACE \subset $ everything else\\
