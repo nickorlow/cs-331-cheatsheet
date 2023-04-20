@@ -196,6 +196,48 @@ It will be $O(n^2)$ if we repedeatly choose the largest element in $L$, since th
 will be in $|S-|$ and each iteration $|S-|$ will be one element smaller than it was last call: $T(n) \leq T(n-1) + c.n$
 where $n = |L|$
 
+We know that the randomized algorithm has the possibility of producing outputs such that it would
+result in a worse-case runtime, but the probability that it will is much lower. To formalize this:
+
+$T(n)$, the running time of our algorithm on an input of size $n$, is a random variable as it relies 
+upon the choice of our random splitter. The algorithm will then split our problem into 2 subproblems that
+will have sizes $j-1$ and $n-j$. When choosing how to write our recurrence, we will take the \underline{maximum}
+of these 2 as we don't know if the answer will be in $S+$ or $S-$. We can now write our recurrence as:
+
+$T(n) = T(max\{j-1, n-j\}) + O(n)$
+
+We can't solve this as there is an unknown value of $j$ in the recurrence. However we can break this into cases
+by using an \textbf{indicator random variable}.
+
+We will decind $X_j$ as the indicator for choosing the $j^{th}$ smallest element from $L$ as the splitter
+where $j = 1..n$. No matter what our splitter chooses, exactly one of our indicator variables will be $1$, 
+and the rest will be $0$.
+
+Based on $j$, each time we split, one partition will be true. We can base the running time of the algorithm
+based on the partitioning cases:
+
+\begin{equation}
+    T(n) = 
+    \left\{
+        \begin{array}{lr}
+            T(max\{0, n-1\})+O(n)& \text{if } 0: (n-1) split\\
+            T(max\{1, n-2\})+O(n)& \text{if } 1: (n-2) split \\
+            ... & ... \\
+            T(max\{n-1, 0\})+O(n)& \text{if } n-1: 0 split \\
+        \end{array}
+    \right\} 
+\end{equation}
+
+We can represent $T(n)$ as the summation of every case multiplied by its decision variable (of wich, only one 
+will be $1$ and the rest will be $0$)
+
+$T(n) = \sum{j=1}^{n}(X_j(T(max\{j-1, n-j\}) + O(n)))$
+
+We then want to calculate the expectation of $T(n)$, which through a bunch of fancy algebra that
+I don't have space for results in:
+
+$\frac{1}{4}c.n - O(N)$ where $c \geq 4 *$ constant of $O$
+
 \section{Misc}
 
 
